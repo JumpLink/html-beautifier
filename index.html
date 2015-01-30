@@ -33,17 +33,18 @@
         <button class="btn btn-primary" id="format" onclick="format();" title="Beautify HTML">
             <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
         </button>
-        <button class="btn btn-primary" id="print" onclick="preparePrint();" title="Beautify and print">
+        <button class="btn btn-primary" id="print-button" title="Beautify and print" data-toggle="modal" data-target="#printModal">
             <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
         </button>
     </div>
     <!-- About Modal -->
-    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                 <div class="modal-header">
-                    <button type="button" class="btn btn-primary pull-right" ria-label="Close" data-dismiss="modal" style="margin-top: -5px;">Close</button>
-                    <h4 class="modal-title" id="aboutModalLabel">About HTML Beautifier</h4>
+                 <div class="modal-header" style="display:flex;padding:5px;" layout="row" layout-align="center">
+                    <button type="button" class="btn btn-primary" ria-label="CloseLabel" data-dismiss="modal" style="padding-right: 20px;">Close</button>
+                    <h4 class="modal-title text-center" id="printModalLabel" style="width:100%;padding-top: 5px;">About HTML Beautifier</h4>
+                    <button type="button" class="btn btn-primary" ria-label="CloseLabel" data-dismiss="modal" style="padding-right: 20px;">Close</button>
                 </div>
                 <div class="modal-body">
                     <p class="text-center">
@@ -64,6 +65,27 @@
                         </dl>
                     </p>
                     <p class="text-center">Copyright (c) 2015 Pascal Garber</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Print Modal -->
+    <div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header" style="display:flex;padding:5px;" layout="row" layout-align="center">
+                    <button type="button" class="btn btn-danger" ria-label="Cancel" data-dismiss="modal" style="padding-right: 20px;">Cancel</button>
+                    <h4 class="modal-title text-center" id="printModalLabel" style="width:100%;padding-top: 5px;">Print</h4>
+                    <button type="button" class="btn btn-primary" ria-label="PrintLabel" onclick="preparePrint();" style="padding-right: 20px;">Print</button>
+                    
+                </div>
+                <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label class="sr-only" for="page-title">Title</label>
+                        <input type="text" class="form-control" id="page-title" placeholder="Enter title">
+                      </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -89,9 +111,16 @@
             editor.setValue(clean);
         }
 
+        var setPageTilte = function () {
+            var title = $('#page-title').val();
+            console.log(title);
+            document.title = title;
+        }
+
         var preparePrint = function () {
             editor.setOption("lineWrapping", true );
             format();
+            setPageTilte();
             window.print();
         }
 
