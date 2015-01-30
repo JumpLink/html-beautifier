@@ -1,2 +1,2 @@
-# html-formatter
-Simple and clean HTML Formatter to use online or offline
+# html-beautifier
+Simple and clean HTML beautifier to use online or offline
