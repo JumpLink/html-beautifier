@@ -2,11 +2,15 @@
 <html>
 <head>
     <title></title>
+
     <link rel="stylesheet" type="text/css"; href="ThirdParty/bootstrap-3.3.2/css/bootstrap.css">
     <link rel="stylesheet" type="text/css"; href="ThirdParty/bootstrap-3.3.2/css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css"; href="ThirdParty/codemirror-4.12/lib/codemirror.css">
     <link rel="stylesheet" type="text/css"; href="Stylesheet/style.css">
     <link rel="stylesheet" type="text/css"; media="print" href="Stylesheet/print.css">
+    
+    <script type="text/javascript" src="ThirdParty/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="ThirdParty/bootstrap-3.3.2/js/bootstrap.js"></script>
     <script type="text/javascript" src="ThirdParty/codemirror-4.12/lib/codemirror.js"></script>
     <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/xml/xml.js"></script>
     <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/css/css.js"></script>
@@ -17,18 +21,54 @@
     <script type="text/javascript" src="ThirdParty/js-beautify-1.5.4/js/lib/beautify-html.js"></script>
 </head>
 <body>
+    <!-- Code Editor -->
     <div id="editorwrapper">
-        <textarea id="editor"></textarea>
+        <textarea id="editor" style="display: none;"></textarea>
     </div>
-
-    <div class="btn-group" id="base-btn-group" role="group" aria-label="...">
-        <button class="btn btn-primary" id="format" onclick="format();" title="Formatieren">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+    <!-- Right-Top Control Button Group -->
+    <div class="btn-group" id="base-btn-group" role="group" aria-label="controlButtonGroupLabel">
+        <button class="btn btn-primary" id="about-button" title="About" data-toggle="modal" data-target="#aboutModal">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
         </button>
-        <button class="btn btn-success" id="print" onclick="preparePrint();" title="Formatieren und drucken">
+        <button class="btn btn-primary" id="format" onclick="format();" title="Beautify HTML">
+            <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-primary" id="print" onclick="preparePrint();" title="Beautify and print">
             <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
         </button>
     </div>
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="btn btn-primary pull-right" ria-label="Close" data-dismiss="modal" style="margin-top: -5px;">Close</button>
+                    <h4 class="modal-title" id="aboutModalLabel">About HTML Beautifier</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        Simple HTML beautifier.
+                        <br>
+                        <br>This software is licensed under the <a href="./LICENSE">MIT License (MIT)</a>.
+                        <br>You can find the source code on <a href="https://github.com/JumpLink/html-beautifier/blob/master/LICENSE">GitHub</a>.
+                    </p>
+                    <p class="text-center">
+                        I am a programmer and freelancer, just contact me!
+                        <dl class="dl-horizontal">
+                          <dt title="Email"><span class="glyphicon glyphicon-envelope"></span></dt>
+                          <dd><a href="mailto:pascal@jumplink.eu">pascal@jumplink.eu</a></dd>
+                          <dt title="Phone"><span class="glyphicon glyphicon-phone"></span></dt>
+                          <dd><a href="tel:+4915756431988">+49(0)157 56431988</a></dd>
+                          <dt title="Web"><span class="glyphicon glyphicon-home"></span></dt>
+                          <dd><a href="http://www.jumplink.eu/">jumplink.eu</a></dd>
+                        </dl>
+                    </p>
+                    <p class="text-center">Copyright (c) 2015 Pascal Garber</p>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Custom JavaScript -->
     <script type="text/javascript">
         var editor;
 
@@ -55,7 +95,7 @@
             window.print();
         }
 
-        window.onload = function () {
+        $(document).ready(function() {
             var options = {
                 lineNumbers: true,
                 mode: "htmlmixed",
@@ -63,7 +103,7 @@
                 lineWrapping: false,
             }
             editor = CodeMirror.fromTextArea(document.getElementById("editor"),options);
-        }
+        });
     </script>
 </body>
 </html> 
