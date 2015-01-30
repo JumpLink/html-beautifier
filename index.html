@@ -27,7 +27,7 @@
     </div>
     <!-- Right-Top Control Button Group -->
     <div class="btn-group" id="base-btn-group" role="group" aria-label="controlButtonGroupLabel">
-        <button class="btn btn-primary" id="about-button" title="About" data-toggle="modal" data-target="#aboutModal">
+        <button class="btn btn-primary" id="about-button" title="About" onclick="showPrintModal();">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
         </button>
         <button class="btn btn-primary" id="format" onclick="format();" title="Beautify HTML">
@@ -117,10 +117,23 @@
             document.title = title;
         }
 
+        var focusPageInput = function () {
+            $('#page-title').focus();
+        }
+
+        var showPrintModal = function () {
+            $('#printModal').modal('show');
+        }
+
+        var hidePrintModal = function () {
+            $('#printModal').modal('hide');
+        }
+
         var preparePrint = function () {
             editor.setOption("lineWrapping", true );
             format();
             setPageTilte();
+            hidePrintModal();
             window.print();
         }
 
@@ -133,6 +146,10 @@
             }
             editor = CodeMirror.fromTextArea(document.getElementById("editor"),options);
         });
+
+        $('#printModal').on('shown.bs.modal', function () {
+            focusPageInput();
+        })
     </script>
 </body>
 </html> 
