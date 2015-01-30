@@ -27,13 +27,13 @@
     </div>
     <!-- Right-Top Control Button Group -->
     <div class="btn-group" id="base-btn-group" role="group" aria-label="controlButtonGroupLabel">
-        <button class="btn btn-primary" id="about-button" title="About" onclick="showPrintModal();">
+        <button class="btn btn-primary" id="about-button" title="About" data-toggle="modal" data-target="#aboutModal">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
         </button>
         <button class="btn btn-primary" id="format" onclick="format();" title="Beautify HTML">
             <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
         </button>
-        <button class="btn btn-primary" id="print-button" title="Beautify and print" data-toggle="modal" data-target="#printModal">
+        <button class="btn btn-primary" id="print-button" title="Beautify and print"  onclick="showPrintModal();">
             <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
         </button>
     </div>
